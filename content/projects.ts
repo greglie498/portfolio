@@ -60,19 +60,47 @@ export const projects: Project[] = [
       ],
     },
     },
-     {
+    {
         slug: "nini-assists",
-        title: "Nini Assits",
-        tagline:"Business website for a US-based concierge company",
+        title: "Nini Assists",
+        tagline: "Business website for a US-based concierge company",
         status: "Client work",
         year: "2026",
-        stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Vercel", "Cloudfare"],
+        stack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Vercel", "Cloudflare"],
         highlights: [
-           "Took the engagement from requirements through wireframes to visual design",
-            "Phased delivery with a client sign-off gate before development",
-            "Source code is private; case study only",
+            "Took the engagement from requirements through wireframes to visual design, with a client sign-off gate before development",
+            "Designed the Supabase data model covering service tiers, event types, portfolio, inquiries, tutoring, and translation",
+            "Next.js build planned after client sign-off; source code is private",
         ],
         featured: true,
+        caseStudy: {
+        overview:
+            "Nini Assists is a business website for a US-based boutique concierge company offering event coordination, tutoring, and translation. I'm running the engagement as a freelancer, from requirements and wireframes through visual design and the data model. The build follows client sign-off on the design.",
+        problem:
+            "The business sells three very different things: tiered event packages, subject-based tutoring, and per-page translation. Each has its own buying flow, but visitors needed one clear site, and the client needed every inquiry to land in one place and to update content later without a developer.",
+        decisions: [
+            {
+            title: "Restructured the events model to match the approved design",
+            description:
+                "The first schema had one table of event types, each with its own page. The approved design instead had three bookable service levels with real detail pages, plus five event types that are purely descriptive. I split the table into service_levels and event_types, and made the change before any data had been seeded, so the migration was safe.",
+            },
+            {
+            title: "One page template, content driven by database rows",
+            description:
+                "The three service-level pages share a single template component. Each page's content comes from its row in the database and its URL from a slug, so adding or editing a tier doesn't need new code.",
+            },
+            {
+            title: "One inquiries table for three kinds of inquiry",
+            description:
+                "Event, tutoring, and translation inquiries all write to one table. An inquiry_type field decides which optional foreign key applies, and a shared form wrapper swaps in the matching fields component. A status field (new, contacted, booked) tracks each lead.",
+            },
+            {
+            title: "Deferred scope explicitly instead of absorbing it",
+            description:
+                "Online payment for translation and a dark mode were both kept out of the current scope and flagged as separately quoted future work. I checked that the palette extends to a dark variant, so dark mode would be an addition rather than a redesign.",
+            },
+        ],
+        },
     },
      {
         slug: "skilllink",
@@ -88,6 +116,34 @@ export const projects: Project[] = [
         ],
         repo: "https://github.com/greglie498/SkillLink",
         featured: true,
+            caseStudy: {
+      overview:
+        "SkillLink is my capstone project at USIU-Africa: a marketplace connecting students and early-career professionals with small and medium businesses for paid short-term work. It aligns with the UN goals for decent work, quality education, and reduced inequalities. It's currently in the requirements and design phase.",
+      problem:
+        "Students and recent graduates struggle to get practical work experience, while small businesses need affordable access to skilled people but can't hire full-time. SkillLink connects the two through skill-based profiles, project postings, applications, reviews, and eventually M-Pesa payments.",
+      decisions: [
+        {
+          title: "A scoped MVP instead of an Upwork clone",
+          description:
+            "The requirements document defines functional and non-functional requirements, user stories, and an MVP. Escrow, dispute resolution, tax handling, multi-currency payouts, advanced invoicing, native mobile apps, and complex automated matching are explicitly out of scope for the first release.",
+        },
+        {
+          title: "User flows first, backend second",
+          description:
+            "The frontend workflows are designed and validated first, and the backend and database are built afterwards around confirmed requirements, so the data model follows real needs instead of guesses.",
+        },
+        {
+          title: "Out-of-scope screens kept, but labeled",
+          description:
+            "The wireframes include messaging, payments and earnings, and a business-side match-score feature that go beyond the MVP. Rather than delete them or quietly expand scope, I kept them in the design file marked as future-phase, so they're documented without committing the build to them.",
+        },
+        {
+          title: "Planned stack",
+          description:
+            "React, TypeScript, Vite, and Tailwind on the frontend; Node.js, Express, PostgreSQL with Prisma, and JWT authentication on the backend, deployed to Vercel and Render. This is the stack set out in the requirements document, and implementation follows the frontend phase.",
+        },
+      ],
+    },
     },
      {
         slug: "lost-and-found",
