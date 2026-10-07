@@ -3,5 +3,5 @@ export const site = {
     email: "eliebothy@gmail.com",
     github: "https://gihub.com/greglie498",
     linkedin: "",
-    cv: "./cv.pdf",
+    cv: "./CV.pdf",
 }
